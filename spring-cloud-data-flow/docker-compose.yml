@@ -1,0 +1,51 @@
+version: "3"
+services:
+  rabbit:
+    image: "rabbitmq:3.7.8-management"
+    container_name: rabbitmq
+    expose:
+      - "5671"
+    ports:
+      - "15671:15672"
+      - "5671:5672"
+    volumes:
+      - rabbitmq_data:/var/lib/rabbitmq
+#Default username and password for rabbitmq is guest/guest
+  redis:
+    image: 'redis:latest'
+    container_name: redis
+    ports:
+      - "6379:6379"
+  mysql:
+    container_name: mysql
+    image: mysql:5.7
+    environment:
+      MYSQL_ROOT_PASSWORD: root
+      MYSQL_DATABASE: scdf
+    volumes:
+      - mysql_data:/var/lib/mysql
+    ports:
+      - 3306:3306
+  dataflow:
+    image: springcloud/spring-cloud-dataflow-server-local:1.6.3.RELEASE
+    container_name: dataflow-server
+    environment:
+      - spring.cloud.dataflow.applicationProperties.stream.spring.rabbitmq.host=rabbit
+      - spring_datasource_url=jdbc:mysql://mysql:3306/scdf
+      - spring_datasource_username=root
+      - spring_datasource_password=root
+      - spring_datasource_driver-class-name=org.mariadb.jdbc.Driver
+    ports:
+      - "9393:9393"
+      - "8050-8100:8050-8100"
+    volumes:
+      - D:\spring-data-flow:/spring-data-flow
+    depends_on:
+      - rabbit
+      - mysql
+
+volumes:
+  mysql_data:
+    driver: local
+  rabbitmq_data:
+    driver: local
