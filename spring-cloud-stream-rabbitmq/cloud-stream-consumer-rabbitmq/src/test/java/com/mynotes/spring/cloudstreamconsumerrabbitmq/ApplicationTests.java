@@ -1,4 +1,4 @@
-package com.mynotes.spring.cloudstreamproducerrabbitmq;
+package com.mynotes.spring.cloudstreamconsumerrabbitmq;
 
 import org.junit.Test;
 import org.junit.runner.RunWith;
@@ -7,7 +7,7 @@ import org.springframework.test.context.junit4.SpringRunner;
 
 @RunWith(SpringRunner.class)
 @SpringBootTest
-public class CloudStreamProducerRabbitmqApplicationTests {
+public class ApplicationTests {
 
 	@Test
 	public void contextLoads() {
