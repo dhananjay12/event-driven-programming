@@ -1,0 +1,15 @@
+spring:
+  cloud:
+    stream:
+      default-binder: servicebus-queue
+    azure:
+      subscription-id: "<your-subcription-id>"
+      auto-create-resources: true
+      environment: Azure
+      region: "West Europe"
+      servicebus: #https://microsoft.github.io/spring-cloud-azure/current/reference/html/index.html#servicebus-connection-configration
+        enabled: true #defaults to true https://microsoft.github.io/spring-cloud-azure/current/reference/html/appendix.html
+        connection-string: "<your-connection-string>"
+        namespace: "<namespace>"
+
+

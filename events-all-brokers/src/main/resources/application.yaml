@@ -1,0 +1,23 @@
+server:
+  port: 8080
+
+spring:
+  rabbitmq:
+    host: localhost
+    port: 5672
+    username: admin
+    password: admin
+  cloud:
+    stream:
+      default-binder: rabbit
+      ## Producer Properties
+      output-bindings: createPerson;deletePerson
+      bindings.createPerson-out-0.destination: people-create
+      bindings.deletePerson-out-0.destination: people-delete
+      ## Consumer Properties
+      function.definition: createPersonConsumer;deletePersonConsumer
+      bindings.createPersonConsumer-in-0.destination: people-create
+      bindings.deletePersonConsumer-in-0.destination: people-delete
+
+
+
